@@ -4,12 +4,17 @@ module org.example.blibliotecafx {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires java.sql;
     requires org.kordamp.bootstrapfx.core;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
-
+    requires java.naming;
     opens org.example.blibliotecafx to javafx.fxml;
     exports org.example.blibliotecafx;
     exports org.example.blibliotecafx.Entities;
-    opens org.example.blibliotecafx.Entities to javafx.fxml;
+    opens org.example.blibliotecafx.Entities to javafx.fxml, org.hibernate.orm.core;
+    exports org.example.blibliotecafx.Service;
+    opens org.example.blibliotecafx.Service to javafx.fxml;
+    exports org.example.blibliotecafx.App;
+    opens org.example.blibliotecafx.App to javafx.fxml;
 }

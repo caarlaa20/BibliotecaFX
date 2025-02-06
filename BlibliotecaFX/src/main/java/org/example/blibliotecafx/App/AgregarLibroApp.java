@@ -1,17 +1,20 @@
-package org.example.blibliotecafx.Entities;
+package org.example.blibliotecafx.App;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.blibliotecafx.Entities.Autor;
+import org.example.blibliotecafx.Entities.Libro;
+import org.example.blibliotecafx.Service.LibroService;
 
 public class AgregarLibroApp extends Application {
     private LibroService libroService = new LibroService();
 
     @Override
     public void start(Stage primaryStage) {
-        // Campos del formulario
+        // Campos de texto para ingresar datos del libro
         TextField tituloField = new TextField();
         tituloField.setPromptText("Título");
 
@@ -27,21 +30,21 @@ public class AgregarLibroApp extends Application {
         TextField anioField = new TextField();
         anioField.setPromptText("Año de publicación");
 
-        // Botón para agregar libro
+        // Botón para agregar el libro
         Button addButton = new Button("Agregar Libro");
         addButton.setOnAction(e -> {
-            // Crear el libro y guardarlo
+            // Crear el objeto Libro
             Libro libro = new Libro();
             libro.setTitulo(tituloField.getText());
             libro.setIsbn(isbnField.getText());
-            libro.setAutor(new Autor());  // Este es un ejemplo simplificado
+            libro.setAutor(new Autor()); // Deberás crear la lógica de Autor también
             libro.setEditorial(editorialField.getText());
             libro.setAnioPublicacion(Integer.parseInt(anioField.getText()));
 
+            // Usar el servicio para agregar el libro
             libroService.agregarLibro(libro);
-            System.out.println("Libro agregado con éxito.");
 
-            // Limpiar campos
+            // Limpiar los campos después de agregar el libro
             tituloField.clear();
             isbnField.clear();
             autorField.clear();
@@ -49,7 +52,7 @@ public class AgregarLibroApp extends Application {
             anioField.clear();
         });
 
-        // Layout y escena
+        // Diseño de la escena
         VBox root = new VBox(10);
         root.getChildren().addAll(tituloField, isbnField, autorField, editorialField, anioField, addButton);
 

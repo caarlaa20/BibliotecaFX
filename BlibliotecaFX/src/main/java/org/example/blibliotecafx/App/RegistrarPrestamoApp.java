@@ -1,10 +1,19 @@
-package org.example.blibliotecafx.Entities;
+package org.example.blibliotecafx.App;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.blibliotecafx.Entities.Libro;
+import org.example.blibliotecafx.Entities.Prestamo;
+import org.example.blibliotecafx.Entities.Socio;
+import org.example.blibliotecafx.Service.LibroService;
+import org.example.blibliotecafx.Service.PrestamoService;
+import org.example.blibliotecafx.Service.SocioService;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class RegistrarPrestamoApp extends Application {
     private PrestamoService prestamoService = new PrestamoService();
@@ -28,8 +37,8 @@ public class RegistrarPrestamoApp extends Application {
             // Crear préstamo y guardarlo
             Libro libro = libroComboBox.getValue();
             Socio socio = socioComboBox.getValue();
-            String fechaPrestamo = fechaPrestamoField.getValue().toString();
-            String fechaDevolucion = fechaDevolucionField.getValue().toString();
+            LocalDate fechaPrestamo = fechaPrestamoField.getValue();
+            LocalDate fechaDevolucion = fechaDevolucionField.getValue();
 
             Prestamo prestamo = new Prestamo();
             prestamo.setLibro(libro);

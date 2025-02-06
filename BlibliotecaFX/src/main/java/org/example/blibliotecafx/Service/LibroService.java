@@ -1,6 +1,8 @@
-package org.example.blibliotecafx.Entities;
+package org.example.blibliotecafx.Service;
 
 import org.example.blibliotecafx.DAO.LibroDAO;
+import org.example.blibliotecafx.Entities.Autor;
+import org.example.blibliotecafx.Entities.Libro;
 
 import java.util.List;
 

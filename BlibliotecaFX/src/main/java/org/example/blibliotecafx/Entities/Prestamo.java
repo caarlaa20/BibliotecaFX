@@ -1,6 +1,8 @@
 package org.example.blibliotecafx.Entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,10 +21,10 @@ public class Prestamo {
     private Socio socio;
 
     @Temporal(TemporalType.DATE)
-    private Date fechaPrestamo;
+    private LocalDate fechaPrestamo;
 
     @Temporal(TemporalType.DATE)
-    private Date fechaDevolucion;
+    private LocalDate fechaDevolucion;
 
     // Getters y Setters
 
@@ -51,19 +53,19 @@ public class Prestamo {
         this.socio = socio;
     }
 
-    public Date getFechaPrestamo() {
+    public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 }
