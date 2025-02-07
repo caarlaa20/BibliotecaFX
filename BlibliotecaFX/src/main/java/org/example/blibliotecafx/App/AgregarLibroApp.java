@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.blibliotecafx.DAO.AutorDAO;
 import org.example.blibliotecafx.Entities.Autor;
 import org.example.blibliotecafx.Entities.Libro;
 import org.example.blibliotecafx.Service.LibroService;
@@ -37,7 +38,7 @@ public class AgregarLibroApp extends Application {
             Libro libro = new Libro();
             libro.setTitulo(tituloField.getText());
             libro.setIsbn(isbnField.getText());
-            libro.setAutor(new Autor()); // Deberás crear la lógica de Autor también
+            libro.setAutor(new AutorDAO().findByName(autorField.getText()).get(0));
             libro.setEditorial(editorialField.getText());
             libro.setAnioPublicacion(Integer.parseInt(anioField.getText()));
 

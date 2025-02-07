@@ -1,16 +1,39 @@
 package org.example.blibliotecafx.DAO;
 
 import org.example.blibliotecafx.Entities.Prestamo;
-import org.example.blibliotecafx.Entities.Socio;
 import org.example.blibliotecafx.Util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class PrestamoDAO extends GenericDAO<Prestamo> {
+public class PrestamoDAO {
 
-    public PrestamoDAO() {
-        super(Prestamo.class);
+    // Registrar préstamo
+    public void save(Prestamo prestamo) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.save(prestamo);
+            transaction.commit();
+        }
+    }
+
+    // Actualizar préstamo
+    public void update(Prestamo prestamo) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.update(prestamo);
+            transaction.commit();
+        }
+    }
+
+    // Eliminar préstamo
+    public void delete(Prestamo prestamo) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.delete(prestamo);
+            transaction.commit();
+        }
     }
 
     // Buscar préstamos activos
@@ -22,11 +45,11 @@ public class PrestamoDAO extends GenericDAO<Prestamo> {
     }
 
     // Buscar historial de préstamos de un socio
-    public List<Prestamo> findPrestamosPorSocio(Socio socio) {
-        String query = "FROM Prestamo WHERE socio = :socio";
+    public List<Prestamo> findPrestamosPorSocio(int socioId) {
+        String query = "FROM Prestamo WHERE socio.id = :socioId";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(query, Prestamo.class)
-                    .setParameter("socio", socio)
+                    .setParameter("socioId", socioId)
                     .list();
         }
     }

@@ -1,7 +1,6 @@
 package org.example.blibliotecafx.Service;
 
 import org.example.blibliotecafx.DAO.LibroDAO;
-import org.example.blibliotecafx.Entities.Autor;
 import org.example.blibliotecafx.Entities.Libro;
 
 import java.util.List;
@@ -34,12 +33,7 @@ public class LibroService {
         return libroDAO.findLibrosDisponibles();
     }
 
-    // Buscar libro por autor
-    public List<Libro> buscarLibrosPorAutor(Autor autor) {
-        return libroDAO.findByAutor(autor);
-    }
-
-    // Buscar libro por título
+    // Buscar libros por título
     public List<Libro> buscarLibrosPorTitulo(String titulo) {
         return libroDAO.findByTitulo(titulo);
     }

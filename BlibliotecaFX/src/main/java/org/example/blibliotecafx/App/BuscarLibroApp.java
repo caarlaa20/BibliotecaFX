@@ -7,12 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.blibliotecafx.Entities.Libro;
-import org.example.blibliotecafx.HelloApplication;
 import org.example.blibliotecafx.Service.LibroService;
 
 import java.util.List;
 
-public class BuscarLibroApp extends HelloApplication {
+public class BuscarLibroApp extends Application {
     private LibroService libroService = new LibroService();
 
     @Override

@@ -13,7 +13,6 @@ import org.example.blibliotecafx.Service.PrestamoService;
 import org.example.blibliotecafx.Service.SocioService;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class RegistrarPrestamoApp extends Application {
     private PrestamoService prestamoService = new PrestamoService();

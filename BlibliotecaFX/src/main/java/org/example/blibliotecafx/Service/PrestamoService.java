@@ -29,8 +29,4 @@ public class PrestamoService {
         return prestamoDAO.findPrestamosActivos();
     }
 
-    // Buscar historial de préstamos de un socio
-    public List<Prestamo> buscarPrestamosPorSocio(Socio socio) {
-        return prestamoDAO.findPrestamosPorSocio(socio);
-    }
 }
