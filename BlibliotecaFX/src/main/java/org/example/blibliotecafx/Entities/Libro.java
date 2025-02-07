@@ -14,12 +14,20 @@ public class Libro {
     private String isbn;
     private String editorial;
     private int anioPublicacion;
+    private boolean prestado;
 
     @ManyToOne
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
-    // Getters y Setters
+    public boolean isPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+// Getters y Setters
 
     public int getId() {
         return id;
