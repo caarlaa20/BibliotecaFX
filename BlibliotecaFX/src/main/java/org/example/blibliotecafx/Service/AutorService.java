@@ -19,8 +19,8 @@ public class AutorService {
     }
 
     // Eliminar autor
-    public void eliminarAutor(Autor autor) {
-        autorDAO.delete(autor);
+    public void eliminarAutor(String nombre) {
+        autorDAO.delete(nombre);
     }
 
     // Buscar autor por nombre

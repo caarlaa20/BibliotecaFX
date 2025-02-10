@@ -1,13 +1,22 @@
 package org.example.blibliotecafx.DAO;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 import org.example.blibliotecafx.Entities.Autor;
 import org.example.blibliotecafx.Util.HibernateUtil;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class AutorDAO {
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     // Guardar autor
     public void save(Autor autor) {
@@ -31,16 +40,24 @@ public class AutorDAO {
         }
     }
 
-    // Eliminar autor
-    public void delete(Autor autor) {
+    public void delete(String nombre) {
+
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.delete(autor);
+
+            Autor autor = session.createQuery("SELECT a FROM Autor a WHERE a.nombre = :nombre", Autor.class)
+                    .setParameter("nombre", nombre)
+                    .getSingleResult();
+
+            session.remove(autor);
             transaction.commit();
-        } catch (Exception e) {
+        }  catch (Exception e) {
             e.printStackTrace();
+
         }
     }
+
+
 
     // Buscar autor por nombre
     public List<Autor> findByName(String nombre) {
@@ -49,6 +66,13 @@ public class AutorDAO {
             return session.createQuery(query, Autor.class)
                     .setParameter("nombre", "%" + nombre + "%")
                     .list();
+        }
+    }
+
+    // Buscar autor por ID
+    public Autor findById(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(Autor.class, id);
         }
     }
 
