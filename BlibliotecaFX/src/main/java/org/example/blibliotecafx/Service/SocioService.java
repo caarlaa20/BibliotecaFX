@@ -6,21 +6,30 @@ import org.example.blibliotecafx.Entities.Socio;
 import java.util.List;
 
 public class SocioService {
-    private SocioDAO socioDAO = new SocioDAO();
 
-    // Agregar socio
+    private SocioDAO socioDAO;
+
+    // Constructor
+    public SocioService() {
+        socioDAO = new SocioDAO();
+    }
+
+    // Agregar un socio
     public void agregarSocio(Socio socio) {
         socioDAO.save(socio);
     }
 
-    // Actualizar socio
-    public void actualizarSocio(Socio socio) {
+    // Modificar un socio
+    public void modificarSocio(Socio socio) {
         socioDAO.update(socio);
     }
 
-    // Eliminar socio
-    public void eliminarSocio(Socio socio) {
-        socioDAO.delete(socio);
+    // Eliminar un socio
+    public void eliminarSocio(int id) {
+        Socio socio = socioDAO.findById(id);
+        if (socio != null) {
+            socioDAO.delete(socio);
+        }
     }
 
     // Buscar socio por nombre
@@ -28,13 +37,8 @@ public class SocioService {
         return socioDAO.findByName(nombre);
     }
 
-    // Buscar socio por teléfono
-    public List<Socio> buscarSocioPorTelefono(String telefono) {
-        return socioDAO.findByTelefono(telefono);
-    }
-
     // Listar todos los socios
-    public List<Socio> listarSocios() {
+    public List<Socio> listarTodosLosSocios() {
         return socioDAO.findAll();
     }
 }

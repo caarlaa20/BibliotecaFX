@@ -57,38 +57,39 @@ public class GestionAutor {
     // Método para modificar un autor
     @FXML
     private void onModificarAutor() {
-        // Obtener el autor seleccionado de la tabla
+        // Verificar si hay un autor seleccionado en la tabla
         Autor autorSeleccionado = tablaAutores.getSelectionModel().getSelectedItem();
 
-        // Verificar si se ha seleccionado un autor
         if (autorSeleccionado == null) {
-            mostrarMensaje(Alert.AlertType.WARNING, "Error", "No se ha seleccionado un autor.");
+            System.out.println("Debes seleccionar un autor para modificarlo.");
             return;
         }
+        
 
         // Obtener los nuevos valores de los campos de texto
-        String nuevoNombre = txtNombre.getText().trim();
-        String nuevaNacionalidad = txtNacionalidad.getText().trim();
+        String nuevoNombre = txtNombre.getText();
+        String nuevaNacionalidad = txtNacionalidad.getText();
 
-        // Verificar si los campos no están vacíos
+        // Validar que los campos no estén vacíos
         if (nuevoNombre.isEmpty() || nuevaNacionalidad.isEmpty()) {
-            mostrarMensaje(Alert.AlertType.WARNING, "Error", "Los campos no pueden estar vacíos.");
+            System.out.println("El nombre y la nacionalidad no pueden estar vacíos.");
             return;
         }
 
-        // Actualizar los valores del autor con los nuevos valores de los campos de texto
+        // Actualizar el autor con los nuevos valores
         autorSeleccionado.setNombre(nuevoNombre);
         autorSeleccionado.setNacionalidad(nuevaNacionalidad);
 
-        // Llamar al DAO para actualizar el autor en la base de datos
+        // Guardar cambios en la base de datos
+        AutorDAO autorDAO = new AutorDAO();
         autorDAO.update(autorSeleccionado);
 
-        // Refrescar la tabla con la lista actualizada de autores
-        listarAutores();
+        // Actualizar la tabla después de modificar
+        tablaAutores.refresh();
 
-        // Mostrar un mensaje de éxito
-        mostrarMensaje(Alert.AlertType.INFORMATION, "Éxito", "El autor ha sido modificado.");
+        System.out.println("Autor modificado correctamente.");
     }
+
 
 
     // Método que se llama cuando se hace clic en "Eliminar Autor"

@@ -13,7 +13,7 @@ public class LibroDAO {
     public void save(Libro libro) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.persist(libro);
+            session.save(libro);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,35 +35,33 @@ public class LibroDAO {
     public void delete(Libro libro) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.delete(libro);
+            session.remove(libro);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // Buscar libro por ID
+    // Buscar un libro por ID
     public Libro findById(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Libro.class, id);
         }
     }
 
-    // Buscar libros por título
-    public List<Libro> findByTitulo(String titulo) {
-        String query = "FROM Libro WHERE titulo LIKE :titulo";
+    // Listar todos los libros disponibles (que no estén prestados)
+    public List<Libro> findLibrosDisponibles() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery(query, Libro.class)
-                    .setParameter("titulo", "%" + titulo + "%")
-                    .list();
+            return session.createQuery("FROM Libro WHERE prestado = false", Libro.class).list();
         }
     }
 
-    // Obtener libros disponibles
-    public List<Libro> findLibrosDisponibles() {
-        String query = "FROM Libro WHERE prestado = false";
+    // Buscar libros por título
+    public List<Libro> findByTitulo(String titulo) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery(query, Libro.class).list();
+            return session.createQuery("FROM Libro WHERE titulo LIKE :titulo", Libro.class)
+                    .setParameter("titulo", "%" + titulo + "%")
+                    .list();
         }
     }
 }

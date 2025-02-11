@@ -46,16 +46,6 @@ public class SocioDAO {
         }
     }
 
-    // Buscar socio por teléfono
-    public List<Socio> findByTelefono(String telefono) {
-        String query = "FROM Socio WHERE telefono LIKE :telefono";
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery(query, Socio.class)
-                    .setParameter("telefono", "%" + telefono + "%")
-                    .list();
-        }
-    }
-
     // Listar todos los socios
     public List<Socio> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

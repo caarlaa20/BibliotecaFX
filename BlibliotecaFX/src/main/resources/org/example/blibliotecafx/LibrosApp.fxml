@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.blibliotecafx.Gestiones.GestionLibro">
 
-</AnchorPane>
+    <!-- Parte superior con título -->
+    <top>
+        <Label text="Gestión de Libros" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #34495e;"
+               padding="10"/>
+    </top>
+
+    <!-- Centro con formulario -->
+    <center>
+        <GridPane hgap="10" vgap="10" padding="20">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+                <ColumnConstraints halignment="LEFT" minWidth="200" hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <Label text="Título:"/>
+            <TextField fx:id="txtTitulo" promptText="Ingrese el título"/>
+
+            <Label text="ISBN:"/>
+            <TextField fx:id="txtIsbn" promptText="Ingrese el ISBN"/>
+
+            <Label text="Editorial:"/>
+            <TextField fx:id="txtEditorial" promptText="Ingrese la editorial"/>
+
+            <Label text="Año de Publicación:"/>
+            <TextField fx:id="txtAnioPublicacion" promptText="Ingrese el año"/>
+
+            <Label text="Autor:"/>
+            <TextField fx:id="txtAutor" promptText="Ingrese el nombre del autor"/>
+
+            <Label text="Prestado:"/>
+            <CheckBox fx:id="chkPrestado"/>
+        </GridPane>
+    </center>
+
+    <!-- Parte inferior con botones -->
+    <bottom>
+        <HBox spacing="15" padding="20" alignment="CENTER">
+            <Button text="Añadir" onAction="#onAñadirLibro" style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+            <Button text="Modificar" onAction="#onModificarLibro" style="-fx-background-color: #f1c40f; -fx-text-fill: white;"/>
+            <Button text="Eliminar" onAction="#onEliminarLibro" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+            <Button text="Buscar" onAction="#onBuscarLibro" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+            <Button text="Listar Todos" onAction="#onListarTodosLosLibros" style="-fx-background-color: #95a5a6; -fx-text-fill: white;"/>
+        </HBox>
+    </bottom>
+
+    <!-- Tabla para mostrar los libros -->
+    <right>
+        <TableView fx:id="tablaLibros" minHeight="300">
+            <columns>
+                <TableColumn text="Título" fx:id="colTitulo" prefWidth="150"/>
+                <TableColumn text="ISBN" fx:id="colIsbn" prefWidth="120"/>
+                <TableColumn text="Editorial" fx:id="colEditorial" prefWidth="150"/>
+                <TableColumn text="Año" fx:id="colAnioPublicacion" prefWidth="80"/>
+                <TableColumn text="Autor" fx:id="colAutor" prefWidth="150"/>
+                <TableColumn text="Prestado" fx:id="colPrestado" prefWidth="80"/>
+            </columns>
+        </TableView>
+    </right>
+
+</BorderPane>

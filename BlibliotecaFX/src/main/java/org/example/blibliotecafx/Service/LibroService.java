@@ -6,7 +6,7 @@ import org.example.blibliotecafx.Entities.Libro;
 import java.util.List;
 
 public class LibroService {
-    private LibroDAO libroDAO = new LibroDAO();
+    private final LibroDAO libroDAO = new LibroDAO();
 
     // Agregar libro
     public void agregarLibro(Libro libro) {
