@@ -13,7 +13,7 @@ public class LibroDAO {
     public void save(Libro libro) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.save(libro);
+            session.persist(libro);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,11 +56,34 @@ public class LibroDAO {
         }
     }
 
+    // Listar todos los autores
+    public List<Libro> findAll() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Libro", Libro.class).list();
+        }
+    }
     // Buscar libros por título
     public List<Libro> findByTitulo(String titulo) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Libro WHERE titulo LIKE :titulo", Libro.class)
                     .setParameter("titulo", "%" + titulo + "%")
+                    .list();
+        }
+    }
+    // Buscar libros por autor
+    public List<Libro> findByAutor(String autor) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Libro WHERE autor LIKE :autor", Libro.class)
+                    .setParameter("autor", "%" + autor + "%")
+                    .list();
+        }
+    }
+
+    // Buscar libros por autor
+    public List<Libro> findByIsbn(String isbn) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Libro WHERE isbn LIKE :isbn", Libro.class)
+                    .setParameter("isbn", "%" + isbn + "%")
                     .list();
         }
     }

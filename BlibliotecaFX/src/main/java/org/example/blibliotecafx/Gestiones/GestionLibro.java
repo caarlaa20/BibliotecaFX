@@ -1,10 +1,15 @@
 package org.example.blibliotecafx.Gestiones;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import org.example.blibliotecafx.DAO.LibroDAO;
+import org.example.blibliotecafx.Entities.Autor;
 import org.example.blibliotecafx.Entities.Libro;
-import org.example.blibliotecafx.Service.LibroService;
 
 import java.util.List;
 
@@ -14,6 +19,9 @@ public class GestionLibro {
     private TextField txtTitulo;
 
     @FXML
+    private TextField txtAutor;
+
+    @FXML
     private TextField txtIsbn;
 
     @FXML
@@ -21,6 +29,9 @@ public class GestionLibro {
 
     @FXML
     private TextField txtAnioPublicacion;
+
+    @FXML
+    private TextField txtPrestado;
 
     @FXML
     private TableView<Libro> tablaLibros;
@@ -33,131 +44,169 @@ public class GestionLibro {
 
     @FXML
     private TableColumn<Libro, String> colEditorial;
+    @FXML
+    private TableColumn<Libro, String> colAutor;
 
     @FXML
-    private TableColumn<Libro, String> colAnioPublicacion;
+    private TableColumn<Libro, Integer> colAnioPublicacion;
 
     @FXML
-    private Label lblResultado;
+    private TableColumn<Libro, Boolean> colPrestado;
 
-    private LibroService libroService = new LibroService();
 
-    // Método que se llama cuando se hace clic en "Añadir Libro"
+
+    // Método que se llama cuando se hace clic en "Añadir Socio"
     @FXML
     public void onAñadirLibro() {
         String titulo = txtTitulo.getText();
         String isbn = txtIsbn.getText();
         String editorial = txtEditorial.getText();
-        String anioPublicacionStr = txtAnioPublicacion.getText();
+       // String autor = txtAutor.getText();
+        Integer anioPublicacion = Integer.parseInt(txtAnioPublicacion.getText());
 
-        if (titulo.isEmpty() || isbn.isEmpty() || editorial.isEmpty() || anioPublicacionStr.isEmpty()) {
+
+        if (titulo.isEmpty() || isbn.isEmpty() || editorial.isEmpty()  || anioPublicacion.intValue() == 0) {
             showAlert(Alert.AlertType.WARNING, "Campos Vacíos", "Por favor, complete todos los campos.");
             return;
         }
 
-        int anioPublicacion = Integer.parseInt(anioPublicacionStr);
-
         Libro libro = new Libro();
+       // Autor a = new Autor();
         libro.setTitulo(titulo);
         libro.setIsbn(isbn);
         libro.setEditorial(editorial);
+        // libro.setAutor(a.getNombre());
         libro.setAnioPublicacion(anioPublicacion);
 
-        libroService.agregarLibro(libro);
+        LibroDAO libroDAO = new LibroDAO();
+        libroDAO.save(libro);
 
         showAlert(Alert.AlertType.INFORMATION, "Libro Añadido", "El libro ha sido añadido correctamente.");
     }
 
-    // Método que se llama cuando se hace clic en "Modificar Libro"
+
     @FXML
     private void onModificarLibro() {
+        // Verificar si hay un autor seleccionado en la tabla
         Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
 
         if (libroSeleccionado == null) {
-            showAlert(Alert.AlertType.WARNING, "Selección Vacía", "Por favor, selecciona un libro para modificar.");
+            System.out.println("Debes seleccionar un libro para modificarlo.");
             return;
         }
 
+
+        // Obtener los nuevos valores de los campos de texto
+      //  String nuevoAutor = txtAutor.getText();
         String nuevoTitulo = txtTitulo.getText();
         String nuevoIsbn = txtIsbn.getText();
         String nuevaEditorial = txtEditorial.getText();
-        String nuevoAnioPublicacionStr = txtAnioPublicacion.getText();
+        Integer nuevoAnioPublicacion = Integer.parseInt(txtAnioPublicacion.getText());
 
-        if (nuevoTitulo.isEmpty() || nuevoIsbn.isEmpty() || nuevaEditorial.isEmpty() || nuevoAnioPublicacionStr.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Campos Vacíos", "Por favor, complete todos los campos.");
+        // Validar que los campos no estén vacíos
+        if (nuevoTitulo.isEmpty() || nuevoIsbn.isEmpty() || nuevaEditorial.isEmpty()|| nuevoAnioPublicacion.intValue() == 0) {
+            System.out.println("El titulo , el telefono/ la editorial y el año no pueden estar vacíos.");
             return;
         }
 
-        int nuevoAnioPublicacion = Integer.parseInt(nuevoAnioPublicacionStr);
-
+        // Actualizar el autor con los nuevos valores
         libroSeleccionado.setTitulo(nuevoTitulo);
+       // libroSeleccionado.setAutor(nuevoAutor);
         libroSeleccionado.setIsbn(nuevoIsbn);
         libroSeleccionado.setEditorial(nuevaEditorial);
         libroSeleccionado.setAnioPublicacion(nuevoAnioPublicacion);
 
-        libroService.actualizarLibro(libroSeleccionado);
+        // Guardar cambios en la base de datos
+        LibroDAO libroDAO = new LibroDAO();
+        libroDAO.update(libroSeleccionado);
 
+        // Actualizar la tabla después de modificar
         tablaLibros.refresh();
 
-        showAlert(Alert.AlertType.INFORMATION, "Libro Modificado", "El libro ha sido modificado correctamente.");
+        System.out.println("Libro modificado correctamente.");
     }
 
-    // Método que se llama cuando se hace clic en "Eliminar Libro"
+
+
+    // Método que se llama cuando se hace clic en "Eliminar Autor"
     @FXML
     private void onEliminarLibro() {
-        Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
+        String titulo = txtTitulo.getText();
 
-        if (libroSeleccionado == null) {
-            showAlert(Alert.AlertType.WARNING, "Selección Vacía", "Por favor, selecciona un libro para eliminar.");
+        if (titulo.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Campo Vacío", "Por favor, ingrese el nombre del libro a eliminar.");
             return;
         }
 
-        libroService.eliminarLibro(libroSeleccionado);
-
-        tablaLibros.getItems().remove(libroSeleccionado);
+        LibroDAO libroDAO = new LibroDAO();
+        libroDAO.delete(libroDAO.findByTitulo(titulo).get(0));
 
         showAlert(Alert.AlertType.INFORMATION, "Libro Eliminado", "El libro ha sido eliminado correctamente.");
     }
 
-    // Método que se llama cuando se hace clic en "Buscar Libro"
+    @FXML
+    private void initialize() {
+        // Configurando las columnas de la tabla
+        colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
+        colIsbn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
+        //colAutor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEditorial()));
+        colEditorial.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEditorial()));
+        colAnioPublicacion.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getAnioPublicacion()).asObject());
+
+    }
+    // Método que se llama cuando se hace clic en "Buscar Autor"
     @FXML
     private void onBuscarLibro() {
         String titulo = txtTitulo.getText();
+       /// String autor = txtAutor.getText();
+        String isbn = txtIsbn.getText();
+        // Obtener el nombre del autor
 
         if (titulo.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Campo Vacío", "Por favor, ingrese el título del libro.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("El campo de titulo está vacío");
+            alert.showAndWait();
             return;
         }
 
-        List<Libro> libros = libroService.buscarLibrosPorTitulo(titulo);
+        // Llamar al DAO para buscar autores
+        LibroDAO libroDAO = new LibroDAO();
+        List<Libro> libros = libroDAO.findByTitulo(titulo);
+
+       // LibroDAO libro1DAO = new LibroDAO();
+       // List<Libro> libros1 = libroDAO.findByAutor(autor);
+
+        LibroDAO libro2DAO = new LibroDAO();
+        List<Libro> libros2 = libroDAO.findByIsbn(isbn);
+
 
         if (libros.isEmpty()) {
-            showAlert(Alert.AlertType.INFORMATION, "Resultado de la Búsqueda", "No se encontraron libros con ese título.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Resultado de la búsqueda");
+            alert.setHeaderText("No se encontró un libro con ese nombre.");
+            alert.showAndWait();
         } else {
-            tablaLibros.getItems().clear();
+            // Mostrar los autores encontrados en la tabla
+            tablaLibros.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
             tablaLibros.getItems().addAll(libros);
         }
     }
 
-    // Método que se llama cuando se hace clic en "Listar Todos los Libros"
+
+    // Método que se llama cuando se hace clic en "Listar Todos los Autores"
+    // Método que se llama cuando se hace clic en "Listar Todos los Autores"
     @FXML
     private void onListarTodosLosLibros() {
-        List<Libro> libros = libroService.listarLibrosDisponibles();
+        // Llamar al DAO para obtener todos los autores
+        LibroDAO libroDAO = new LibroDAO();
+        List<Libro> libros = libroDAO.findAll();
 
-        tablaLibros.getItems().clear();
+        // Mostrar todos los autores en la tabla
+        tablaLibros.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
         tablaLibros.getItems().addAll(libros);
     }
 
-    // Inicializar las columnas de la tabla
-    @FXML
-    private void initialize() {
-        colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
-        colIsbn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
-        colEditorial.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEditorial()));
-        colAnioPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getAnioPublicacion())));
-    }
-
-    // Método para mostrar alertas
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -165,4 +214,5 @@ public class GestionLibro {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

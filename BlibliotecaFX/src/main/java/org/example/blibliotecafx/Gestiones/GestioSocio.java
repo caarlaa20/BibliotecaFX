@@ -8,7 +8,7 @@ import org.example.blibliotecafx.Entities.Socio;
 
 import java.util.List;
 
-public class GestionSocio {
+public class GestioSocio {
 
     @FXML
     private TextField txtNombre;
@@ -25,18 +25,9 @@ public class GestionSocio {
     @FXML
     private TableColumn<Socio, String> colTelefono;
 
-    @FXML
-    private Label lblResultado;
 
-    @FXML
-    private void initialize() {
-        // Configuración de columnas de la tabla
-        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        colTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
-        listarSocios();  // Listar socios al inicializar
-    }
 
-    // Añadir socio
+    // Método que se llama cuando se hace clic en "Añadir Socio"
     @FXML
     public void onAñadirSocio() {
         String nombre = txtNombre.getText();
@@ -55,89 +46,111 @@ public class GestionSocio {
         socioDAO.save(socio);
 
         showAlert(Alert.AlertType.INFORMATION, "Socio Añadido", "El socio ha sido añadido correctamente.");
-        listarSocios();
     }
 
-    // Modificar socio
+    // Método que se llama cuando se hace clic en "Modificar Autor"
+    // Método para modificar un autor
     @FXML
     private void onModificarSocio() {
+        // Verificar si hay un autor seleccionado en la tabla
         Socio socioSeleccionado = tablaSocios.getSelectionModel().getSelectedItem();
 
         if (socioSeleccionado == null) {
-            showAlert(Alert.AlertType.WARNING, "Selección de Socio", "Por favor, seleccione un socio para modificar.");
+            System.out.println("Debes seleccionar un socio para modificarlo.");
             return;
         }
 
+
+        // Obtener los nuevos valores de los campos de texto
         String nuevoNombre = txtNombre.getText();
         String nuevoTelefono = txtTelefono.getText();
 
+        // Validar que los campos no estén vacíos
         if (nuevoNombre.isEmpty() || nuevoTelefono.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Campos Vacíos", "Por favor, complete todos los campos.");
+            System.out.println("El nombre y el telefono no pueden estar vacíos.");
             return;
         }
 
+        // Actualizar el autor con los nuevos valores
         socioSeleccionado.setNombre(nuevoNombre);
         socioSeleccionado.setTelefono(nuevoTelefono);
 
+        // Guardar cambios en la base de datos
         SocioDAO socioDAO = new SocioDAO();
         socioDAO.update(socioSeleccionado);
 
-        showAlert(Alert.AlertType.INFORMATION, "Socio Modificado", "El socio ha sido modificado correctamente.");
-        listarSocios();
+        // Actualizar la tabla después de modificar
+        tablaSocios.refresh();
+
+        System.out.println("Socio modificado correctamente.");
     }
 
-    // Eliminar socio
+
+
+    // Método que se llama cuando se hace clic en "Eliminar Autor"
     @FXML
     private void onEliminarSocio() {
-        Socio socioSeleccionado = tablaSocios.getSelectionModel().getSelectedItem();
+        String nombre = txtNombre.getText();
 
-        if (socioSeleccionado == null) {
-            showAlert(Alert.AlertType.WARNING, "Selección de Socio", "Por favor, seleccione un socio para eliminar.");
+        if (nombre.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Campo Vacío", "Por favor, ingrese el nombre del socio a eliminar.");
             return;
         }
 
         SocioDAO socioDAO = new SocioDAO();
-        socioDAO.delete(socioSeleccionado);
+        socioDAO.delete(nombre);
 
         showAlert(Alert.AlertType.INFORMATION, "Socio Eliminado", "El socio ha sido eliminado correctamente.");
-        listarSocios();
     }
 
-    // Buscar socio
+    @FXML
+    private void initialize() {
+        // Configurando las columnas de la tabla
+        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+    }
+    // Método que se llama cuando se hace clic en "Buscar Autor"
     @FXML
     private void onBuscarSocio() {
-        String nombre = txtNombre.getText();
+        String nombre = txtNombre.getText(); // Obtener el nombre del autor
 
         if (nombre.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Campo Vacío", "Por favor, ingrese un nombre para buscar.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("El campo de nombre está vacío");
+            alert.showAndWait();
             return;
         }
 
+        // Llamar al DAO para buscar autores
         SocioDAO socioDAO = new SocioDAO();
         List<Socio> socios = socioDAO.findByName(nombre);
 
         if (socios.isEmpty()) {
-            showAlert(Alert.AlertType.INFORMATION, "Búsqueda sin Resultados", "No se encontraron socios con ese nombre.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Resultado de la búsqueda");
+            alert.setHeaderText("No se encontró un socio con ese nombre.");
+            alert.showAndWait();
         } else {
-            tablaSocios.getItems().clear();
+            // Mostrar los autores encontrados en la tabla
+            tablaSocios.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
             tablaSocios.getItems().addAll(socios);
         }
     }
 
-    // Listar todos los socios
+
+    // Método que se llama cuando se hace clic en "Listar Todos los Autores"
+    // Método que se llama cuando se hace clic en "Listar Todos los Autores"
     @FXML
     private void onListarTodosLosSocios() {
-        listarSocios();
-    }
-
-    // Actualizar la tabla con todos los socios
-    private void listarSocios() {
+        // Llamar al DAO para obtener todos los autores
         SocioDAO socioDAO = new SocioDAO();
         List<Socio> socios = socioDAO.findAll();
-        tablaSocios.getItems().clear();
+
+        // Mostrar todos los autores en la tabla
+        tablaSocios.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
         tablaSocios.getItems().addAll(socios);
     }
-
     // Método para mostrar alertas
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
@@ -146,4 +159,5 @@ public class GestionSocio {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

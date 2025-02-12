@@ -25,12 +25,12 @@ public class SocioService {
     }
 
     // Eliminar un socio
-    public void eliminarSocio(int id) {
+    /*public void eliminarSocio(int id) {
         Socio socio = socioDAO.findById(id);
         if (socio != null) {
             socioDAO.delete(socio);
         }
-    }
+    }*/
 
     // Buscar socio por nombre
     public List<Socio> buscarSocioPorNombre(String nombre) {

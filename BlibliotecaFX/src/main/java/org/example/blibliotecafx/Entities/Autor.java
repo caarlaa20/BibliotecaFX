@@ -15,6 +15,14 @@ public class Autor {
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Libro> libros;
 
+    public Autor(int id, String nombre, String nacionalidad, List<Libro> libros) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+        this.libros = libros;
+    }
+
+    public Autor (){}
     // Getters y Setters
 
     public int getId() {
