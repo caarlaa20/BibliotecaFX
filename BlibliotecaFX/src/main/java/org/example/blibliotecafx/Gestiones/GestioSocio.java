@@ -17,6 +17,8 @@ public class GestioSocio {
     private TextField txtTelefono;
 
     @FXML
+    private TextField txtDireccion;
+    @FXML
     private TableView<Socio> tablaSocios;
 
     @FXML
@@ -25,6 +27,11 @@ public class GestioSocio {
     @FXML
     private TableColumn<Socio, String> colTelefono;
 
+    @FXML
+    private TableColumn<Socio, String> colDireccion;
+
+
+
 
 
     // Método que se llama cuando se hace clic en "Añadir Socio"
@@ -32,8 +39,9 @@ public class GestioSocio {
     public void onAñadirSocio() {
         String nombre = txtNombre.getText();
         String telefono = txtTelefono.getText();
+        String direccion = txtDireccion.getText();
 
-        if (nombre.isEmpty() || telefono.isEmpty()) {
+        if (nombre.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Campos Vacíos", "Por favor, complete todos los campos.");
             return;
         }
@@ -41,11 +49,13 @@ public class GestioSocio {
         Socio socio = new Socio();
         socio.setNombre(nombre);
         socio.setTelefono(telefono);
+        socio.setDireccion(direccion);
 
         SocioDAO socioDAO = new SocioDAO();
         socioDAO.save(socio);
 
         showAlert(Alert.AlertType.INFORMATION, "Socio Añadido", "El socio ha sido añadido correctamente.");
+        limpiarCampos();
     }
 
     // Método que se llama cuando se hace clic en "Modificar Autor"
@@ -64,9 +74,10 @@ public class GestioSocio {
         // Obtener los nuevos valores de los campos de texto
         String nuevoNombre = txtNombre.getText();
         String nuevoTelefono = txtTelefono.getText();
+        String nuevoDireccion = txtDireccion.getText();
 
         // Validar que los campos no estén vacíos
-        if (nuevoNombre.isEmpty() || nuevoTelefono.isEmpty()) {
+        if (nuevoNombre.isEmpty() || nuevoTelefono.isEmpty() || nuevoDireccion.isEmpty()) {
             System.out.println("El nombre y el telefono no pueden estar vacíos.");
             return;
         }
@@ -74,6 +85,7 @@ public class GestioSocio {
         // Actualizar el autor con los nuevos valores
         socioSeleccionado.setNombre(nuevoNombre);
         socioSeleccionado.setTelefono(nuevoTelefono);
+        socioSeleccionado.setDireccion(nuevoDireccion);
 
         // Guardar cambios en la base de datos
         SocioDAO socioDAO = new SocioDAO();
@@ -83,6 +95,8 @@ public class GestioSocio {
         tablaSocios.refresh();
 
         System.out.println("Socio modificado correctamente.");
+
+        limpiarCampos();
     }
 
 
@@ -101,6 +115,7 @@ public class GestioSocio {
         socioDAO.delete(nombre);
 
         showAlert(Alert.AlertType.INFORMATION, "Socio Eliminado", "El socio ha sido eliminado correctamente.");
+        limpiarCampos();
     }
 
     @FXML
@@ -108,6 +123,8 @@ public class GestioSocio {
         // Configurando las columnas de la tabla
         colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+        colDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
+
     }
     // Método que se llama cuando se hace clic en "Buscar Autor"
     @FXML
@@ -136,6 +153,7 @@ public class GestioSocio {
             tablaSocios.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
             tablaSocios.getItems().addAll(socios);
         }
+        limpiarCampos();
     }
 
 
@@ -163,6 +181,7 @@ public class GestioSocio {
     private void limpiarCampos() {
         txtNombre.clear();
         txtTelefono.clear();
+        txtDireccion.clear();
     }
 
 }

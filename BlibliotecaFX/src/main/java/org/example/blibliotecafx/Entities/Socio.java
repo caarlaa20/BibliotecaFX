@@ -17,6 +17,9 @@ public class Socio {
     @Column(name = "telefono")
     private String telefono;
 
+    @Column(name = "direccion")
+    private String direccion;
+
     // Relación con préstamos
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Prestamo> prestamos;
@@ -30,10 +33,15 @@ public class Socio {
     // Constructores, getters y setters
     public Socio() {}
 
-    public Socio(String nombre, String telefono) {
+    public Socio(String nombre, String telefono, String direccion) {
         this.nombre = nombre;
         this.telefono = telefono;
+        this.direccion = direccion;
     }
+
+    public String getDireccion() {return direccion;}
+
+    public void setDireccion(String direccion) {this.direccion = direccion;}
 
     public int getId() {
         return id;

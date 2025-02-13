@@ -51,6 +51,8 @@ public class GestionAutor {
         autorDAO.save(autor);
 
         showAlert(AlertType.INFORMATION, "Autor Añadido", "El autor ha sido añadido correctamente.");
+
+        limpiarCampos();
     }
 
     // Método que se llama cuando se hace clic en "Modificar Autor"
@@ -88,6 +90,7 @@ public class GestionAutor {
         tablaAutores.refresh();
 
         System.out.println("Autor modificado correctamente.");
+        limpiarCampos();
     }
 
 
@@ -106,6 +109,7 @@ public class GestionAutor {
         autorDAO.delete(nombre);
 
         showAlert(AlertType.INFORMATION, "Autor Eliminado", "El autor ha sido eliminado correctamente.");
+        limpiarCampos();
     }
 
     @FXML
@@ -141,7 +145,9 @@ public class GestionAutor {
             tablaAutores.getItems().clear();  // Limpiar la tabla antes de agregar nuevos resultados
             tablaAutores.getItems().addAll(autores);
         }
+        limpiarCampos();
     }
+
 
 
     // Método que se llama cuando se hace clic en "Listar Todos los Autores"
@@ -163,10 +169,12 @@ public class GestionAutor {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+        limpiarCampos();
     }
     @FXML
     private void limpiarCampos() {
         txtNombre.clear();
         txtNacionalidad.clear();
     }
+
 }

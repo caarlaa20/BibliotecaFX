@@ -7,10 +7,10 @@
 
     <GridPane hgap="20" vgap="20" style="-fx-background-color: white; -fx-padding: 20px; -fx-border-radius: 15px; -fx-border-color: #ccc; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">
         <Label text="Socio:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
-        <ComboBox fx:id="comboSocio" promptText="Seleccionar socio" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+        <ComboBox fx:id="comboSocio" promptText="Seleccionar socio" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #ff69b4;"/>
 
         <Label text="Libro:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
-        <ComboBox fx:id="comboLibro" promptText="Seleccionar libro" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+        <ComboBox fx:id="comboLibro" promptText="Seleccionar libro" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-color: #ff69b4;"/>
 
         <Label text="Fecha de Préstamo:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
         <DatePicker fx:id="fechaPrestamo" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
@@ -20,9 +20,9 @@
     </GridPane>
 
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Registrar Préstamo" onAction="#onRegistrarPrestamo" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
-        <Button text="Listar Libros Prestados" onAction="#onListarLibrosPrestados" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
-        <Button text="Listar Libros de Socio" onAction="#onListarLibrosDeSocio" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+        <Button text="Registrar Préstamo" onAction="#onRegistrarPrestamo" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+        <Button text="Listar Libros Prestados" onAction="#onListarLibrosPrestados" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+        <Button text="Listar Libros de Socio" onAction="#onListarLibrosDeSocio" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
     </HBox>
 
     <TableView fx:id="tablaPrestamos" prefHeight="450" style="-fx-background-color: white; -fx-border-radius: 15px; -fx-border-color: #ccc; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">

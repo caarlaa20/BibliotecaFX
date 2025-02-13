@@ -19,15 +19,15 @@
         <TextField fx:id="txtAnioPublicacion" promptText="Ingrese el año de publicación" GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-border-color: #ccc; -fx-border-radius: 5px;" prefWidth="200"/>
 
         <Label text="Autor:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
-        <ComboBox fx:id="comboAutor" promptText="Seleccionar autor" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold;-fx-border-color: #ccc; -fx-border-radius: 5px;" prefWidth="200"/>
+        <ComboBox fx:id="comboAutor" promptText="Seleccionar autor" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;-fx-border-color: #ccc; -fx-border-radius: 5px;" prefWidth="200"/>
     </GridPane>
 
     <HBox spacing="15" alignment="CENTER">
-        <Button text="Añadir" onAction="#onAñadirLibro" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
-        <Button text="Modificar" onAction="#onModificarLibro" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
-        <Button text="Eliminar" onAction="#onEliminarLibro" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
-        <Button text="Buscar" onAction="#onBuscarLibro" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
-        <Button text="Listar Todos" onAction="#onListarTodosLosLibros" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
+        <Button text="Añadir" onAction="#onAñadirLibro" style="-fx-background-color: #ff69b4;-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
+        <Button text="Modificar" onAction="#onModificarLibro" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
+        <Button text="Eliminar" onAction="#onEliminarLibro" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
+        <Button text="Buscar" onAction="#onBuscarLibro" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
+        <Button text="Listar Todos" onAction="#onListarTodosLosLibros" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px; -fx-border-radius: 8px;"/>
     </HBox>
 
     <TableView fx:id="tablaLibros" prefHeight="350" style="-fx-background-color: white; -fx-border-radius: 15px; -fx-border-color: #ccc; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">

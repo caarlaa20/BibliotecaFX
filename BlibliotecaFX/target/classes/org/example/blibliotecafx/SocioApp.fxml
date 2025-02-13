@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.blibliotecafx.Gestiones.GestioSocio" spacing="20" alignment="CENTER" stylesheets="@styles.css" style="-fx-padding: 20px; -fx-background-color: #f8f0fc; -fx-border-color: #ff69b4;">
-    <Label text="Gestión de Socios" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+<VBox alignment="CENTER" spacing="20" style="-fx-padding: 20px; -fx-background-color: #f8f0fc; -fx-border-color: #ff69b4;" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="org.example.blibliotecafx.Gestiones.GestioSocio">
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Gestión de Socios" />
 
-    <GridPane hgap="15" vgap="15" style="-fx-background-color: white; -fx-padding: 15px; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
-        <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtNombre" promptText="Ingrese el nombre" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <GridPane hgap="15" style="-fx-background-color: white; -fx-padding: 15px; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);" vgap="15">
+        <Label style="-fx-font-weight: bold;" text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="txtNombre" promptText="Ingrese el nombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-        <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtTelefono" promptText="Ingrese el teléfono" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label style="-fx-font-weight: bold;" text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="txtTelefono" promptText="Ingrese el teléfono" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label style="-fx-font-weight: bold;" text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="txtDireccion" promptText="Ingrese la dirección" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
-    <HBox spacing="15" alignment="CENTER">
-        <Button text="Añadir" onAction="#onAñadirSocio" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Button text="Modificar" onAction="#onModificarSocio" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Button text="Eliminar" onAction="#onEliminarSocio" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Button text="Buscar" onAction="#onBuscarSocio" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Button text="Listar Todos" onAction="#onListarTodosLosSocios" styleClass="action-button" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    <HBox alignment="CENTER" spacing="15">
+        <Button onAction="#onAñadirSocio" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;" styleClass="action-button" text="Añadir" />
+        <Button onAction="#onModificarSocio" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;" styleClass="action-button" text="Modificar" />
+        <Button onAction="#onEliminarSocio" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;" styleClass="action-button" text="Eliminar" />
+        <Button onAction="#onBuscarSocio" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;" styleClass="action-button" text="Buscar" />
+        <Button onAction="#onListarTodosLosSocios" style="-fx-background-color: #ff69b4; -fx-text-fill: white; -fx-font-weight: bold;" styleClass="action-button" text="Listar Todos" />
     </HBox>
 
     <TableView fx:id="tablaSocios" prefHeight="350" style="-fx-background-color: white; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
         <columns>
-            <TableColumn text="Nombre" fx:id="colNombre" prefWidth="250"/>
-            <TableColumn text="Teléfono" fx:id="colTelefono" prefWidth="250"/>
+            <TableColumn fx:id="colNombre" prefWidth="250" text="Nombre" />
+            <TableColumn fx:id="colTelefono" prefWidth="250" text="Teléfono" />
+            <TableColumn fx:id="colDireccion" prefWidth="250" text="Dirección" />
         </columns>
     </TableView>
 </VBox>

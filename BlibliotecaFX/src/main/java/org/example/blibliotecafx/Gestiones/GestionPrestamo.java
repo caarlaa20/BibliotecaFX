@@ -148,4 +148,13 @@ public class GestionPrestamo {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    @FXML
+    private void limpiarCampos() {
+        comboLibro.setValue(null);
+        comboSocio.setValue(null);
+        fechaPrestamo.setValue(null);
+        fechaDevolucion.setValue(null);
+    }
+
 }
