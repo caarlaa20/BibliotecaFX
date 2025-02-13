@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="Principal" prefHeight="500.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.blibliotecafx.Gestiones.GestionInterfaz" style="-fx-background-color: linear-gradient(to bottom, #ffebee, #ff69b4);">
+
+    <VBox alignment="CENTER" layoutX="250.0" layoutY="150.0" prefHeight="250.0" prefWidth="400.0" spacing="20" style="-fx-background-color: white; -fx-border-radius: 20px; -fx-padding: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);">
+        <Label text="📚 Biblioteca" style="-fx-text-fill: #ff4081; -fx-font-size: 24px; -fx-font-weight: bold; -fx-alignment: center;"/>
+        <Button onAction="#GestionLibrosOn" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #ff4081; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25px;" text="📚 Gestión de Libros"/>
+        <Button onAction="#GestionAutoresOn" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #ff4081; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25px;" text="✍️ Gestión de Autores"/>
+        <Button onAction="#GestionSociosOn" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #ff4081; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25px;" text="👥 Gestión de Socios"/>
+        <Button onAction="#PrestamosOn" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #ff4081; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25px;" text="📖 Préstamos"/>
+
+    </VBox>
+</AnchorPane>

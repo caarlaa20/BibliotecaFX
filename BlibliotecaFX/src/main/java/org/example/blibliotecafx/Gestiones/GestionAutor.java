@@ -164,4 +164,9 @@ public class GestionAutor {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    @FXML
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtNacionalidad.clear();
+    }
 }

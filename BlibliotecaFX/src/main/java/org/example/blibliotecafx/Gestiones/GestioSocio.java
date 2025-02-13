@@ -159,5 +159,10 @@ public class GestioSocio {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    @FXML
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtTelefono.clear();
+    }
 
 }

@@ -1,23 +1,70 @@
-/* Estilo para los botones */
-.button {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
+/* Estilos generales */
+.root {
+    -fx-padding: 30px;
+    -fx-background-color: #f8f0fc;
+    -fx-border-radius: 15px;
+    -fx-border-color: #ff69b4;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,105,180,0.5), 10, 0, 0, 10);
 }
 
-/* Estilo para los campos de texto */
+/* Estilo de la etiqueta "Gestión de Libros" */
+.label-titulo {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* Estilos para el GridPane */
+.grid-pane {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+/* Estilo de las etiquetas y campos de texto */
+.label-input {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
 .text-field {
     -fx-border-color: #ccc;
     -fx-border-radius: 5px;
-    -fx-padding: 5px;
-    -fx-font-size: 14px;
 }
 
-/* Estilo para el GridPane */
-.grid-pane {
-    -fx-hgap: 10;
-    -fx-vgap: 10;
-    -fx-padding: 20;
+/* Estilo del ComboBox */
+.combo-box {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-background-color: #ff1493;
+    -fx-font-weight: bold;
+}
+
+/* Estilo de los botones */
+.action-button {
+    -fx-background-color: #ff1493;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-radius: 8px;
+}
+
+/* Estilo de la tabla */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-radius: 15px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+/* Estilo de las columnas de la tabla */
+.table-column {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
 }
