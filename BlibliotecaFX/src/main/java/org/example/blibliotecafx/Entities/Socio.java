@@ -21,6 +21,12 @@ public class Socio {
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private List<Prestamo> prestamos;
 
+    // Sobrescribir el método toString para que devuelva el nombre del socio
+    @Override
+    public String toString() {
+        return nombre;  // Solo mostrar el nombre del socio
+    }
+
     // Constructores, getters y setters
     public Socio() {}
 

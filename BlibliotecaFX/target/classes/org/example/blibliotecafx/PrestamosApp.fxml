@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.blibliotecafx.Gestiones.GestionPrestamo" spacing="20" alignment="CENTER" stylesheets="@styles.css" style="-fx-padding: 30px; -fx-background-color: #f8f0fc; -fx-border-radius: 15px; -fx-border-color: #ff69b4; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(255,105,180,0.5), 10, 0, 0, 10);">
+    <Label text="Gestión de Préstamos" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-padding: 10px;"/>
+
+    <GridPane hgap="20" vgap="20" style="-fx-background-color: white; -fx-padding: 20px; -fx-border-radius: 15px; -fx-border-color: #ccc; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">
+        <Label text="Socio:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+        <ComboBox fx:id="comboSocio" promptText="Seleccionar socio" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+
+        <Label text="Libro:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+        <ComboBox fx:id="comboLibro" promptText="Seleccionar libro" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+
+        <Label text="Fecha de Préstamo:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+        <DatePicker fx:id="fechaPrestamo" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+
+        <Label text="Fecha de Devolución:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+        <DatePicker fx:id="fechaDevolucion" GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+    </GridPane>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Registrar Préstamo" onAction="#onRegistrarPrestamo" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+        <Button text="Listar Libros Prestados" onAction="#onListarLibrosPrestados" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+        <Button text="Listar Libros de Socio" onAction="#onListarLibrosDeSocio" styleClass="action-button" style="-fx-background-color: #ff1493; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px; -fx-border-radius: 8px;"/>
+    </HBox>
+
+    <TableView fx:id="tablaPrestamos" prefHeight="450" style="-fx-background-color: white; -fx-border-radius: 15px; -fx-border-color: #ccc; -fx-border-width: 2px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);">
+        <columns>
+            <TableColumn text="Socio" fx:id="colSocio" prefWidth="150" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <TableColumn text="Libro" fx:id="colLibro" prefWidth="250" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <TableColumn text="Fecha de Préstamo" fx:id="colFechaPrestamo" prefWidth="150" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <TableColumn text="Fecha de Devolución" fx:id="colFechaDevolucion" prefWidth="150" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+        </columns>
+    </TableView>
+
+</VBox>

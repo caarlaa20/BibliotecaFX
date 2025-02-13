@@ -1,6 +1,5 @@
 package org.example.blibliotecafx.Entities;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -19,15 +18,13 @@ public class Libro {
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
-    public boolean isPrestado() {
-        return prestado;
+    // Sobrescribir el método toString para que devuelva el título
+    @Override
+    public String toString() {
+        return titulo;  // Solo mostrar el título del libro
     }
 
-    public void setPrestado(boolean prestado) {
-        this.prestado = prestado;
-    }
-// Getters y Setters
-
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -74,5 +71,13 @@ public class Libro {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    public boolean isPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
     }
 }

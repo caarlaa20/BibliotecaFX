@@ -3,31 +3,31 @@ package org.example.blibliotecafx.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "prestamos")
 public class Prestamo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)  // Asegúrate de que la carga sea inmediata
     @JoinColumn(name = "libro_id")
     private Libro libro;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)  // Asegúrate de que la carga sea inmediata
     @JoinColumn(name = "socio_id")
     private Socio socio;
 
-    @Temporal(TemporalType.DATE)
+
     private LocalDate fechaPrestamo;
 
     @Temporal(TemporalType.DATE)
     private LocalDate fechaDevolucion;
 
-    // Getters y Setters
 
+    // Getters y Setters
 
     public int getId() {
         return id;

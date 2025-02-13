@@ -18,6 +18,6 @@ module org.example.blibliotecafx {
 
     opens org.example.blibliotecafx.Gestiones to javafx.fxml;
     opens org.example.blibliotecafx.Service to javafx.fxml;
-    exports org.example.blibliotecafx.App;
-    opens org.example.blibliotecafx.App to javafx.fxml;
+
+
 }

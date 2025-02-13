@@ -36,13 +36,15 @@ public class PrestamoDAO {
         }
     }
 
-    // Buscar préstamos activos
     public List<Prestamo> findPrestamosActivos() {
         String query = "FROM Prestamo WHERE fechaDevolucion IS NULL";
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(query, Prestamo.class).list();
         }
     }
+
+
+
 
     // Buscar historial de préstamos de un socio
     public List<Prestamo> findPrestamosPorSocio(int socioId) {
